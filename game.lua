@@ -7,8 +7,9 @@ local controls	= 	require "lib.controls"
 local Game	=	class( "Game" ):include( states )
 
 function Game:initialize( config )
-	self.config		= 	config
-	self.controls	=	controls	
+	self.config	= 	config
+	self.controls	=	controls
+	self.state
 end
 
 function Game:update( dt )
