@@ -27,7 +27,7 @@ function PlayerControl:GetAngle()
 end
 
 function PlayerControl:GetMovementVector()
-	local dirx, diry, mult	=	0, 0, 0
+	local dirx, diry, mult	=	0, 0, false
 	if input:down( "game_up" ) then
 		diry	=	-1
 	end
@@ -44,7 +44,7 @@ function PlayerControl:GetMovementVector()
 		( input:down( "game_up" ) and input:down( "game_right" ) ) or
 		( input:down( "game_down" ) and input:down( "game_left" ) ) or
 		( input:down( "game_down" ) and input:down( "game_right" ) ) then
-		mult	= 	1	
+		mult	= 	true	
 	end
 	return dirx, diry, mult
 end
