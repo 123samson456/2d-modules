@@ -2,12 +2,15 @@
 
 local class	= 	require "lib.middleclass"
 
+local Gun	=	require "gun"
+
 local Body	=	class( "Body" )
 
 function Body:initialize()
 	self.position	=	{ x = 0, y = 0 }
 	self.angle	=	0
 	self.weapon	=	"silencer"
+	self.attack	=	true
 	self.desiredAngle	=	0
 	self.desiredMovementVector	=	{ x = 0, y = 0, mult = 0 }
 	self.diagonalMultiplier	=	.7
@@ -20,10 +23,24 @@ end
 
 function Body:update( dt )
 	self:Move( dt )
+	if self.attack then
+		self:Shoot( Gun )	
+	end
 end
 
-function Body:Move( dt )	
-	self.position.x 	=	self.position.x + self.desiredMovementVector.x * self.desiredMovementVector.mult * self.diagonalMultiplier
+function Body:Move( dt )
+	local velocityMultiplier	=	1
+	if self.desiredMovementVector.mult then
+		velocityMultiplier	=	self.diagonalMultiplier
+	end
+	self.position.x 	=	self.position.x + self.desiredMovementVector.x * velocityMultiplier
+	self.position.y		=	self.position.y + self.desiredMovementVector.y * velocityMultiplier
+end
+
+function Body:Shoot( gun )
+	local weapon	=	self.weapon
+	local data	=	gun.weaponTable[ self.weapon ]
+	gun:Shoot( data )
 end
 
 return Body
