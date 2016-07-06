@@ -9,7 +9,7 @@ local PlayerControl	=	  class( "Player" )
 function PlayerControl:initialize( camera, body )
  	self.camera		=	camera
  	self.body		=	body
- 	self.weapons	=	{ "machine_gun", "pistol", "silencer" }
+ 	self.weapons	=	{ "machine", "pistol", "silencer" }
  	self.weaponName	=	"silencer"
 end
 
