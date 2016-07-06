@@ -24,7 +24,7 @@ end
 function Body:update( dt )
 	self:Move( dt )
 	if self.attack then
-		self:Shoot( Gun )	
+		self:Shoot( dt, Gun )	
 	end
 end
 
@@ -37,10 +37,11 @@ function Body:Move( dt )
 	self.position.y		=	self.position.y + self.desiredMovementVector.y * velocityMultiplier
 end
 
-function Body:Shoot( gun )
+function Body:Shoot( dt, Gun )
+	local gun	=	Gun
 	local weapon	=	self.weapon
 	local data	=	gun.weaponTable[ self.weapon ]
-	gun:Shoot( data )
+	gun:Shoot( dt, data, self.position, angle )
 end
 
 return Body
