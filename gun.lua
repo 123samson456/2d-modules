@@ -30,7 +30,7 @@ function Gun:Shoot( dt, data, pos, angle )
 	-- Calculate Shooting cooldown
 	self.cooldown 	=	math.clamp( self.cooldown - dt, 0, self.maxCooldown )
 	if self.cooldown == 0 then
-		Bullets:Add( pos.x, pos.y, angle )
+		Bullets:Add( pos.x, pos.y, angle, data.velocity )
 	end
 end
 
